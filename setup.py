@@ -11,8 +11,16 @@ from distutils.errors import DistutilsArgError
 
 this_dir = os.path.realpath(os.path.dirname(__file__))
 
-
 VERSION = '1.1.9'
+
+# the parent directory of libpostal c library
+HOME = "C:\\msys64\\home\\JSchaffer\\"
+
+
+INCLUDE = HOME
+LIB = os.path.join(HOME, 'libpostal')
+
+
 
 
 def main():
@@ -28,57 +36,58 @@ def main():
         ext_modules=[
             Extension('postal._expand',
                       sources=['postal/pyexpand.c', 'postal/pyutils.c'],
-                      libraries=['postal'],
-                      include_dirs=['/usr/local/include'],
-                      library_dirs=['/usr/local/lib'],
+                      libraries=['libpostal'],
+                      include_dirs=[INCLUDE],
+                      library_dirs=[LIB],
                       extra_compile_args=['-std=c99'],
                       ),
             Extension('postal._parser',
                       sources=['postal/pyparser.c', 'postal/pyutils.c'],
-                      libraries=['postal'],
-                      include_dirs=['/usr/local/include'],
-                      library_dirs=['/usr/local/lib'],
+                      libraries=['libpostal'],
+                      include_dirs=[INCLUDE],
+                      library_dirs=[LIB],
                       extra_compile_args=['-std=c99'],
                       ),
             Extension('postal._token_types',
                       sources=['postal/pytokentypes.c'],
-                      libraries=['postal'],
-                      include_dirs=['/usr/local/include'],
-                      library_dirs=['/usr/local/lib'],
+                      libraries=['libpostal'],
+                      include_dirs=[INCLUDE],
+                      library_dirs=[LIB],
                       extra_compile_args=['-std=c99'],
                       ),
             Extension('postal._tokenize',
                       sources=['postal/pytokenize.c', 'postal/pyutils.c'],
-                      libraries=['postal'],
-                      include_dirs=['/usr/local/include'],
-                      library_dirs=['/usr/local/lib'],
+                      libraries=['libpostal'],
+                      include_dirs=[INCLUDE],
+                      library_dirs=[LIB],
                       extra_compile_args=['-std=c99'],
                       ),
             Extension('postal._normalize',
                       sources=['postal/pynormalize.c', 'postal/pyutils.c'],
-                      libraries=['postal'],
-                      include_dirs=['/usr/local/include'],
-                      library_dirs=['/usr/local/lib'],
+                      libraries=['libpostal'],
+                      include_dirs=[INCLUDE],
+                      library_dirs=[LIB],
                       extra_compile_args=['-std=c99'],
                       ),
             Extension('postal._near_dupe',
                       sources=['postal/pyneardupe.c', 'postal/pyutils.c'],
-                      libraries=['postal'],
-                      include_dirs=['/usr/local/include'],
-                      library_dirs=['/usr/local/lib'],
+                      libraries=['libpostal'],
+                      include_dirs=[INCLUDE],
+                      library_dirs=[LIB],
                       extra_compile_args=['-std=c99'],
                       ),
             Extension('postal._dedupe',
                       sources=['postal/pydedupe.c', 'postal/pyutils.c'],
-                      libraries=['postal'],
-                      include_dirs=['/usr/local/include'],
-                      library_dirs=['/usr/local/lib'],
+                      libraries=['libpostal'],
+                      include_dirs=[INCLUDE],
+                      library_dirs=[LIB],
                       extra_compile_args=['-std=c99'],
                       ),
         ],
         packages=find_packages(),
+        include_package_data=True,
         package_data={
-            'postal': ['*.h']
+            'postal': ['*.h', '*.dll']
         },
         zip_safe=False,
         url='https://github.com/openvenues/pypostal',
@@ -105,6 +114,9 @@ def main():
             'Topic :: Software Development :: Libraries :: Python Modules'
         ],
     )
+
+
+
 
 
 if __name__ == '__main__':
